@@ -6,7 +6,6 @@ function App() {
   const [issues, setIssues] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("Open");
 
   useEffect(() => {
     fetchIssues();
@@ -21,14 +20,13 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    const newIssue = { title, description, status };
+    const newIssue = { title, description};
 
     axios.post("http://localhost:8080/api/issues", newIssue)
       .then(() => {
         fetchIssues(); // Refresh issues list
         setTitle("");
         setDescription("");
-        setStatus("Open"); // Reset form fields
       })
       .catch(error => console.error("Error adding issue:", error));
   };
@@ -52,11 +50,6 @@ function App() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          <option value="Open">Open</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Closed">Closed</option>
-        </select>
         <button type="submit">Add Issue</button>
       </form>
 
