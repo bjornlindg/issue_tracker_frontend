@@ -6,10 +6,14 @@ function App() {
   const [issues, setIssues] = useState([]);
 
   useEffect(() => {
+    fetchIssues();
+  }, []);
+
+  const fetchIssues = () => {
     axios.get("http://localhost:8080/api/issues")
       .then(response => setIssues(response.data))
       .catch(error => console.error("Error fetching issues:", error));
-  }, []);
+  };
 
   return (
     <div className="container">
