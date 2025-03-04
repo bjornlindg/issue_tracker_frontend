@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import "./App.css";
+import axios from "axios"; 
 
 function App() {
   const [issues, setIssues] = useState([]);
@@ -11,17 +12,18 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>Issues:</h1>
-      <ul>
+    <div className="container">
+      <h1>Issue Tracker</h1>
+      <ul className="issues-list">
         {issues.map(issue => (
-          <li key={issue.id}>
+          <li key={issue.id} className="issue-item">
             <strong>{issue.title}</strong> - {issue.status}
           </li>
         ))}
       </ul>
     </div>
   );
+
 }
 
 export default App;
