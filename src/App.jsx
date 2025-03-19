@@ -57,7 +57,7 @@ function App() {
       <ul className="issues-list">
         {issues.map(issue => (
           <li key={issue.id} className="issue-item">
-            <strong>{issue.title}</strong> - {issue.status}
+            {issue.id} - <strong>{issue.title}</strong> - {issue.status} - {issue.description} - {issue.createdAt} - {issue.updatedAt}
           </li>
         ))}
       </ul>
