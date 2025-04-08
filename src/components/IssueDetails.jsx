@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Issuedetails.css"
 
 function IssueDetails( { onSave } ) {
   const { id } = useParams();
@@ -33,23 +34,49 @@ function IssueDetails( { onSave } ) {
   const handleCancel = () => navigate("/");
 
   if (!issue) return <p>Loading...</p>;
-
+  
   return (
     <div className="container">
       <h2>Issue Details</h2>
-      <label>ID:</label> <p>{issue.id}</p>
-      <label>Title:</label> <input value={title} onChange={(e) => setTitle(e.target.value)} />
-      <label>Description:</label> <input value={description} onChange={(e) => setDescription(e.target.value)} />
-      <label>Status:</label> 
-      <select value={status} onChange={(e) => setStatus(e.target.value)}>
-        <option value="OPEN">Open</option>
-        <option value="IN_PROGRESS">In Progress</option>
-        <option value="CLOSED">Closed</option>
-      </select>
-      <label>Created At:</label> <p>{issue.createdAt}</p>
-      <label>Updated At:</label> <p>{issue.updatedAt}</p>
-      <button onClick={handleSave}>Save</button>
-      <button onClick={handleCancel}>Cancel</button>
+
+      <div className="field">
+        <label>ID:</label>
+        <span>{issue.id}</span>
+      </div>
+
+      <div className="field">
+        <label>Title:</label>
+        <input value={title} onChange={(e) => setTitle(e.target.value)} />
+      </div>
+
+      <div className="field">
+        <label>Description:</label>
+        <input value={description} onChange={(e) => setDescription(e.target.value)} />
+      </div>
+
+      <div className="field">
+        <label>Status:</label>
+        <select value={status} onChange={(e) => setStatus(e.target.value)}>
+          <option value="OPEN">Open</option>
+          <option value="IN_PROGRESS">In Progress</option>
+          <option value="CLOSED">Closed</option>
+        </select>
+      </div>
+
+      <div className="field">
+        <label>Created At:</label>
+        <span>{issue.createdAt}</span>
+      </div>
+
+      <div className="field">
+        <label>Updated At:</label>
+        <span>{issue.updatedAt}</span>
+      </div>
+
+      <div className="button-group">
+        <button onClick={handleSave}>Save</button>
+        <button onClick={handleCancel}>Cancel</button>
+      </div>
     </div>
   );
 }
