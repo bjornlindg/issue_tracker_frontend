@@ -54,5 +54,25 @@
   background-color: #0056b3;
 }
 
+.users-list {
+  list-style: none;
+  padding: 0;
+}
 
+.user-item {
+  background: #201f1f;
+  padding: 10px;
+  margin: 5px 0;
+  width: 300px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  margin-bottom: 20px;
+}
 
