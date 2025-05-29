@@ -10,6 +10,8 @@ function IssueDetails( { onSave } ) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
+  const [assignedUser, setAssignedUser] = useState("");
+
 
   useEffect(() => {
     axios.get(`http://localhost:8080/api/issues/${id}`)
@@ -18,6 +20,7 @@ function IssueDetails( { onSave } ) {
         setTitle(response.data.title);
         setDescription(response.data.description);
         setStatus(response.data.status);
+        setAssignedUser(response.data.assignedUser)
       })
       .catch(error => console.error("Error fetching issue:", error));
   }, [id]);
@@ -61,6 +64,11 @@ function IssueDetails( { onSave } ) {
           <option value="IN_PROGRESS">In Progress</option>
           <option value="CLOSED">Closed</option>
         </select>
+      </div>
+
+      <div className="field">
+        <label>Assigned user:</label>
+        <input value={assignedUser} onChange={(e) => setAssignedUser(e.target.value)} />
       </div>
 
       <div className="field">
