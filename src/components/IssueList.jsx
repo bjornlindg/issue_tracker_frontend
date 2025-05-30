@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 function IssueList( {issues }) {
   return (
@@ -16,5 +17,9 @@ function IssueList( {issues }) {
     </div>
   );
 }
+
+IssueList.propTypes = {
+  issues: PropTypes.array.isRequired
+};
 
 export default IssueList;

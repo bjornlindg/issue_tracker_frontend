@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Issuedetails.css"
+import PropTypes from 'prop-types';
 
 function IssueDetails( { onSave } ) {
   const { id } = useParams();
@@ -88,5 +89,9 @@ function IssueDetails( { onSave } ) {
     </div>
   );
 }
+
+IssueDetails.propTypes = {
+  onSave: PropTypes.func.isRequired
+};
 
 export default IssueDetails;

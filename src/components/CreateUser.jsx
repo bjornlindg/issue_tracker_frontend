@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import PropTypes from 'prop-types';
 
 function CreateUser({ onUserCreated }) {
     const [firstName, setFirstName] = useState("");
@@ -41,5 +42,9 @@ function CreateUser({ onUserCreated }) {
         </div>
     );
 }
+
+CreateUser.propTypes = {
+    onUserCreated: PropTypes.func.isRequired,
+};
 
 export default CreateUser;

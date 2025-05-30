@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 function UserList( { users }) {
   return (
@@ -16,5 +17,9 @@ function UserList( { users }) {
     </div>
   );
 }
+
+UserList.propTypes = {
+    users: PropTypes.array.isRequired
+};
 
 export default UserList;

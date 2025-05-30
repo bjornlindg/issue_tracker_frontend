@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import PropTypes from 'prop-types';
 
 function CreateIssue({ onIssueCreated }) {
   const [title, setTitle] = useState("");
@@ -40,5 +41,9 @@ function CreateIssue({ onIssueCreated }) {
     </div>
   );
 }
+
+CreateIssue.propTypes = {
+  onIssueCreated: PropTypes.func.isRequired,
+};
 
 export default CreateIssue;
