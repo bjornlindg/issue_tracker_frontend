@@ -4,15 +4,15 @@ import axios from "axios";
 import "./Issuedetails.css"
 import PropTypes from 'prop-types';
 
-function IssueDetails( { onSave } ) {
+function IssueDetails({ onSave }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [issue, setIssue] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
-  const [assignedUser, setAssignedUser] = useState("");
-
+  const [users, setUsers] = useState([]);
+  const [assignedUserId, setAssignedUserId] = useState(null);
 
   useEffect(() => {
     axios.get(`http://localhost:8080/api/issues/${id}`)
@@ -21,24 +21,34 @@ function IssueDetails( { onSave } ) {
         setTitle(response.data.title);
         setDescription(response.data.description);
         setStatus(response.data.status);
-        setAssignedUser(response.data.assignedUser)
+        setAssignedUserId(response.data.assignedUser?.id || null)
       })
       .catch(error => console.error("Error fetching issue:", error));
+
+    axios.get("http://localhost:8080/api/users")
+      .then(response => setUsers(response.data))
+      .catch(error => console.error("Error fetching users:", error));
   }, [id]);
 
   const handleSave = () => {
-    axios.put(`http://localhost:8080/api/issues/${id}`, { title, description, status })
+    console.log(assignedUserId);
+    axios.put(`http://localhost:8080/api/issues/${id}`, { 
+      title, 
+      description, 
+      status,
+      assignedUser: assignedUserId ? { id: assignedUserId } : null 
+    })
       .then(() => {
         onSave();
         navigate("/");
-    })
+      })
       .catch(error => console.error("Error updating issue:", error));
   };
 
   const handleCancel = () => navigate("/");
 
   if (!issue) return <p>Loading...</p>;
-  
+
   return (
     <div className="container">
       <h2>Issue Details</h2>
@@ -68,8 +78,15 @@ function IssueDetails( { onSave } ) {
       </div>
 
       <div className="field">
-        <label>Assigned user:</label>
-        <input value={assignedUser} onChange={(e) => setAssignedUser(e.target.value)} />
+        <label>Assigned User:</label>
+        <select value={assignedUserId || ""} onChange={(e) => setAssignedUserId(Number(e.target.value))}>
+          <option value="">-- None --</option>
+          {users.map(user => (
+            <option key={user.id} value={user.id}>
+              {user.firstName} {user.lastName}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="field">
