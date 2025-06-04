@@ -9,7 +9,7 @@ function IssueList( {issues }) {
         {issues.map(issue => (
           <li key={issue.id} className="issue-item">
             <Link to={`/issues/${issue.id}`}>
-              {issue.id} - <strong>{issue.title}</strong> - {issue.status} - {issue.description} - {issue.createdAt} - {issue.updatedAt}
+              {issue.id} - <strong>{issue.title}</strong> - {issue.status} - {issue.description} - {issue.createdAt} - {issue.updatedAt} - {(issue.assignedUser ? issue.assignedUser.fullName : "No assigned user")}
             </Link>
           </li>
         ))}
